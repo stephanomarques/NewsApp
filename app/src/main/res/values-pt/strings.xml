@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewsApplication</string>
+    <string name="enter_email">Insira Email</string>
+    <string name="enter_password">Insira Password</string>
+    <string name="enter_name">Insira Nome</string>
+</resources>
