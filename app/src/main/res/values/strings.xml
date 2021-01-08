@@ -10,6 +10,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="sign_out_string">Sign out</string>
+    <string name="menu_home">Home</string>
     <string name="menu_breaking">Breaking News</string>
     <string name="menu_world">World</string>
     <string name="menu_business">Business</string>
