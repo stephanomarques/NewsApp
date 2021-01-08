@@ -1,4 +1,4 @@
-package com.example.newsapplication.ui.breaking
+package com.example.newsapplication.ui.business
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.newsapplication.R
 
-class BreakingFragment : Fragment() {
+class BusinessFragment : Fragment() {
 
-    private lateinit var breakingViewModel: BreakingViewModel
+    private lateinit var businessViewModel: BusinessViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        breakingViewModel =
-                ViewModelProvider(this).get(BreakingViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_breaking)
-        breakingViewModel.text.observe(viewLifecycleOwner, Observer {
+        businessViewModel =
+                ViewModelProvider(this).get(BusinessViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_business, container, false)
+        val textView: TextView = root.findViewById(R.id.text_business)
+        businessViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
