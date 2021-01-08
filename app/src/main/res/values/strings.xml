@@ -10,8 +10,13 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="sign_out_string">Sign out</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-
+    <string name="menu_breaking">Breaking News</string>
+    <string name="menu_world">World</string>
+    <string name="menu_business">Business</string>
+    <string name="menu_tech">Technology</string>
+    <string name="menu_sports">Sports</string>
+    <string name="menu_science">Science</string>
+    <string name="menu_health">Health</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_settings">Settings</string>
 </resources>
