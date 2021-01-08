@@ -27,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-
 class MainActivity : AppCompatActivity() {
 
     //Firebase var
@@ -126,11 +125,10 @@ class MainActivity : AppCompatActivity() {
                 }
     }
 
+    //Update UI runs every startup to continue the past session (if not signed out)
     fun updateUI(currentUser: FirebaseUser?) {
         if(currentUser != null){
             val userEmail: String? = currentUser.email
-            Toast.makeText(this@MainActivity, "Welcome $userEmail",
-                    Toast.LENGTH_SHORT).show()
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
