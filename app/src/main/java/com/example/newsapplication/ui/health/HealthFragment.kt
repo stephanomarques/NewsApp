@@ -1,4 +1,4 @@
-package com.example.newsapplication.ui.world
+package com.example.newsapplication.ui.health
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.newsapplication.R
 
-class WorldFragment : Fragment() {
+class HealthFragment : Fragment() {
 
-    private lateinit var worldViewModel: WorldViewModel
+    private lateinit var healthViewModel: HealthViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        worldViewModel =
-                ViewModelProvider(this).get(WorldViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_world, container, false)
-        val textView: TextView = root.findViewById(R.id.text_world)
-        worldViewModel.text.observe(viewLifecycleOwner, Observer {
+        healthViewModel =
+                ViewModelProvider(this).get(HealthViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_health, container, false)
+        val textView: TextView = root.findViewById(R.id.text_health)
+        healthViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

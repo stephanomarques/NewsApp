@@ -1,4 +1,4 @@
-package com.example.newsapplication.ui.world
+package com.example.newsapplication.ui.tech
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.newsapplication.R
 
-class WorldFragment : Fragment() {
+class TechFragment : Fragment() {
 
-    private lateinit var worldViewModel: WorldViewModel
+    private lateinit var techViewModel: TechViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        worldViewModel =
-                ViewModelProvider(this).get(WorldViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_world, container, false)
-        val textView: TextView = root.findViewById(R.id.text_world)
-        worldViewModel.text.observe(viewLifecycleOwner, Observer {
+        techViewModel =
+                ViewModelProvider(this).get(TechViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_tech, container, false)
+        val textView: TextView = root.findViewById(R.id.text_tech)
+        techViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
