@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:padding="5dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/news_image"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:imageUrl=""
+                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:placeHolder="@{@drawable/bg_image_round}"
+                    app:roundedCorner="@{@dimen/image_rounded_corner}"
+                    tools:src="@drawable/bg_image_round"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/news_source"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/news_image"
+                    tools:text="Crypto Coins News" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/news_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/news_source"
+                    tools:text="Facebook’s Cryptocurrency Will Pay Interest to Users, Predicts Blockchain Regulator" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

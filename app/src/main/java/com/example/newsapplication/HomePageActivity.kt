@@ -56,7 +56,7 @@ class HomePageActivity : AppCompatActivity() {
         val acct = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null) {
             //Fill Text View on Nav Drawer with the user Name
-            val personName = acct.displayName
+            //val personName = acct.displayName
             //nameTextView.text = personName
             //photoImageView.setImageURI(acct.photoUrl)
 
