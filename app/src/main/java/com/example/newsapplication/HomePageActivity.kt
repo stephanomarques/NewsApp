@@ -72,6 +72,13 @@ class HomePageActivity : AppCompatActivity() {
         Toast.makeText(this@HomePageActivity, "Welcome $currentUserEmail",
                 Toast.LENGTH_SHORT).show()
 
+
+
+
+
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
