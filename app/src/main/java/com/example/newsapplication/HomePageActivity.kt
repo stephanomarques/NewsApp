@@ -16,10 +16,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.newsapplication.adapter.NewsAdapter
+import com.example.newsapplication.entities.News
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import org.w3c.dom.Text
 
 
@@ -30,9 +35,18 @@ class HomePageActivity : AppCompatActivity() {
     private var currentUserEmail: String = ""
     private var currentUserName: String = ""
 
+    private val title: String = "titleeee"
+    private val source: String = "sourceee"  //apagar quando vir, adiantar o api para conseguir ter info no recycler
+    private var imageUrl: String = "https://wonderfulengineering.com/wp-content/uploads/2014/10/wallpaper-photos-31-800x450.jpg"
+    val uri = Uri.parse(imageUrl)
+    private val someNews: News = News(0, uri, "this is title", "sourceeee")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
+
+        // recycler view
+        val recyclerView = findViewById<RecyclerView>(R.id.news_recyclerview)
 
         //START - OF - NAV ////////////////////////////////////////////////////////////////////////
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -72,12 +86,12 @@ class HomePageActivity : AppCompatActivity() {
         Toast.makeText(this@HomePageActivity, "Welcome $currentUserEmail",
                 Toast.LENGTH_SHORT).show()
 
+        //RecyclerView Configuration/////////////////////////////////////////////////////////
+        //recyclerView.layoutManager = LinearLayoutManager(this@HomePageActivity)
+        //recyclerView.adapter = NewsAdapter(someNews)
 
-
-
-
-
-
+        //val image: ImageView = findViewById(R.id.news_image)
+        //Picasso.get().load(imageUrl).into(image);
 
     }
 

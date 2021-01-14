@@ -2,13 +2,8 @@ package com.example.newsapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
-import android.util.Patterns
-import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignIn.getClient
@@ -16,15 +11,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
@@ -64,7 +55,6 @@ class MainActivity : AppCompatActivity() {
                 .build()
         googleSignInClient = getClient(this, gso)
         ////////////////////////////////////////////////////////////////////////////////////////
-
     }
 
     //Start check for signed in user
@@ -113,8 +103,19 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        //Returns True if User is New and False if user exists already
+                        val isNew: Boolean? = task.result?.additionalUserInfo?.isNewUser
+
+                        if(isNew == true){
+                            //criar tabela no firebase com settings do user como este é um user novo
+                        }else{
+                            //nao criar nada e continuar com tudo normal
+                        }
+
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("SignInActivity", "signInWithCredential:success")
+                        Log.d("isNewUser:", "$isNew")
+
                         //val user = auth.currentUser
                         val intent = Intent(this, HomePageActivity::class.java)
                         startActivity(intent)

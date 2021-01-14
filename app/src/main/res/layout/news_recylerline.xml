@@ -13,13 +13,10 @@
                     android:id="@+id/news_image"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    app:imageUrl=""
                     app:layout_constraintDimensionRatio="16:9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:placeHolder="@{@drawable/bg_image_round}"
-                    app:roundedCorner="@{@dimen/image_rounded_corner}"
                     tools:src="@drawable/bg_image_round"
                     tools:ignore="MissingConstraints" />
 

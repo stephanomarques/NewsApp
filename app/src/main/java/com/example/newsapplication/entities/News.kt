@@ -1,16 +1,12 @@
 package com.example.newsapplication.entities
 
-class News {
+import android.net.Uri
+import android.widget.ImageView
 
-    //User Markers
-    data class News(
-            val id: Int,
-            val title: String,
-            val type: String,
-            val address: String,
-            val lat: String,
-            val lng: String,
-            val problem: String,
-            val user_id: Int
-    )
-}
+data class News(
+    val id: Int,
+    val image: Uri,
+    val title: String,
+    val source: String,
+    //val type: String
+)
