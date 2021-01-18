@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.newsapplication.entities.Types
+import com.example.newsapplication.entities.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignIn.getClient
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -16,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
@@ -57,13 +61,13 @@ class MainActivity : AppCompatActivity() {
         ////////////////////////////////////////////////////////////////////////////////////////
     }
 
-    //Start check for signed in user
+    //Start check for signed in user////////////////////////////////////////////////////////
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         updateUI(currentUser)
-    }
+    }////////////////////////////////////////////////////////////////////////////////////
 
     //SignIn Function Called When Google Login Button Pressed
     private fun signIn() {
@@ -93,11 +97,14 @@ class MainActivity : AppCompatActivity() {
             }else{
                 //if task not successful
                 Log.w("SignInActivity", exception.toString())
+                Toast.makeText(this, "Google Sign in Failed!",
+                        Toast.LENGTH_SHORT).show()
             }
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //Firebase Authentication when Google Sign in is clicked////////////////////////////
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
@@ -106,10 +113,11 @@ class MainActivity : AppCompatActivity() {
                         //Returns True if User is New and False if user exists already
                         val isNew: Boolean? = task.result?.additionalUserInfo?.isNewUser
 
+                        //Se utilizador for novo, criar na base de dados entrada para ele
                         if(isNew == true){
-                            //criar tabela no firebase com settings do user como este é um user novo
-                        }else{
-                            //nao criar nada e continuar com tudo normal
+                            // Criar child no database com uid do novo user
+                            val currentUser = auth.currentUser
+                            writeNewUser(currentUser)
                         }
 
                         // Sign in success, update UI with the signed-in user's information
@@ -124,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                         Log.w("SignInActivity", "signInWithCredential:failure", task.exception)
                     }
                 }
-    }
+    }////////////////////////////////////////////////////////////////////////////////////
 
     //Update UI runs every startup to continue the past session (if not signed out)
     fun updateUI(currentUser: FirebaseUser?) {
@@ -133,6 +141,19 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, HomePageActivity::class.java)
             startActivity(intent)
         }
-    }
+    }////////////////////////////////////////////////////////////////////////////////////
+
+    //New User Inserted in RTDB////////////////////////////////////////////////////////////////////
+    fun writeNewUser(currentUser: FirebaseUser?) {
+        val user = User(currentUser?.uid, currentUser?.email)
+        val database = Firebase.database
+
+        val types: Types = Types(Business = false, Health = false, Science = false, Sports = false, Tech = false)
+
+        val reference = database.getReference("/Users")
+
+        reference.child(currentUser!!.uid).setValue(types)
+
+    }/////////////////////////////////////////////////////////////////////////////////////////////
 
 }

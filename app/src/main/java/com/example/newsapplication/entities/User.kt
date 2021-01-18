@@ -1,8 +1,14 @@
 package com.example.newsapplication.entities
-import com.google.firebase.database.IgnoreExtraProperties
 
-@IgnoreExtraProperties
 data class User(
-        var name: String? = "",
+        var userId: String? = "",
         var email: String? = "",
+)
+
+data class Types(
+        var Business: Boolean = false,
+        var Health: Boolean = false,
+        var Science: Boolean = false,
+        var Sports: Boolean = false,
+        var Tech: Boolean = false,
 )

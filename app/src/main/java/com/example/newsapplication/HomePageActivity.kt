@@ -23,6 +23,7 @@ import com.example.newsapplication.entities.News
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import org.w3c.dom.Text
@@ -92,6 +93,8 @@ class HomePageActivity : AppCompatActivity() {
 
         //val image: ImageView = findViewById(R.id.news_image)
         //Picasso.get().load(imageUrl).into(image);
+
+
 
     }
 
