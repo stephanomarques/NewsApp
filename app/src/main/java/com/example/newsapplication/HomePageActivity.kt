@@ -35,19 +35,14 @@ class HomePageActivity : AppCompatActivity() {
 
     private var currentUserEmail: String = ""
     private var currentUserName: String = ""
-
-    private val title: String = "titleeee"
-    private val source: String = "sourceee"  //apagar quando vir, adiantar o api para conseguir ter info no recycler
-    private var imageUrl: String = "https://wonderfulengineering.com/wp-content/uploads/2014/10/wallpaper-photos-31-800x450.jpg"
-    val uri = Uri.parse(imageUrl)
-    private val someNews: News = News(0, uri, "this is title", "sourceeee")
+    //val uri = Uri.parse(imageUrl)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
 
         // recycler view
-        val recyclerView = findViewById<RecyclerView>(R.id.news_recyclerview)
+        val recyclerViewNews = findViewById<RecyclerView>(R.id.news_recyclerview)
 
         //START - OF - NAV ////////////////////////////////////////////////////////////////////////
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -88,8 +83,8 @@ class HomePageActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT).show()
 
         //RecyclerView Configuration/////////////////////////////////////////////////////////
-        //recyclerView.layoutManager = LinearLayoutManager(this@HomePageActivity)
-        //recyclerView.adapter = NewsAdapter(someNews)
+        //recyclerViewNews.layoutManager = LinearLayoutManager(this)
+
 
         //val image: ImageView = findViewById(R.id.news_image)
         //Picasso.get().load(imageUrl).into(image);

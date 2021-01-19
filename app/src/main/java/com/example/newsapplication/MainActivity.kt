@@ -148,12 +148,13 @@ class MainActivity : AppCompatActivity() {
         val user = User(currentUser?.uid, currentUser?.email)
         val database = Firebase.database
 
+        //Default Types to be Inserted
         val types: Types = Types(Business = false, Health = false, Science = false, Sports = false, Tech = false)
 
         val reference = database.getReference("/Users")
 
+        //Insert uid as Users child and types and uid children
         reference.child(currentUser!!.uid).setValue(types)
-
     }/////////////////////////////////////////////////////////////////////////////////////////////
 
 }

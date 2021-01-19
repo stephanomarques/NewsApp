@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,8 @@ class BusinessFragment : Fragment() {
         val textView: TextView = root.findViewById(R.id.text_business)
         businessViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
+
+            Toast.makeText(activity, "Failureeeee", Toast.LENGTH_SHORT).show()
         })
         return root
     }
