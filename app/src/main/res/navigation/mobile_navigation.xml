@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_world"
-        android:name="com.example.newsapplication.ui.world.WorldFragment"
-        android:label="@string/menu_world"
-        tools:layout="@layout/fragment_world" />
+        android:id="@+id/nav_entertainment"
+        android:name="com.example.newsapplication.ui.entertainment.EntertainmentFragment"
+        android:label="@string/menu_entertainment"
+        tools:layout="@layout/fragment_entertainment" />
 
     <fragment
         android:id="@+id/nav_business"
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/nav_tech"
-        android:name="com.example.newsapplication.ui.tech.TechFragment"
+        android:name="com.example.newsapplication.ui.tech.ProfileFragment"
         android:label="@string/menu_tech"
         tools:layout="@layout/fragment_tech" />
 

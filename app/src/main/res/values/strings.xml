@@ -12,7 +12,7 @@
     <string name="sign_out_string">Sign out</string>
     <string name="menu_home">Home</string>
     <string name="menu_breaking">Breaking News</string>
-    <string name="menu_world">World</string>
+    <string name="menu_entertainment">Entertainment</string>
     <string name="menu_business">Business</string>
     <string name="menu_tech">Technology</string>
     <string name="menu_sports">Sports</string>
@@ -23,6 +23,13 @@
     <string name="menu_fav">Favourites</string>
     <string name="image_des">Image</string>
     <string name="image_des_ic_share">Share</string>
-
+    <string name="types_update_btn_text">Update</string>
+    <string name="types_checkbox_sport">Sports</string>
+    <string name="types_title_text">News Types!</string>
+    <string name="types_checkbox_health">Health</string>
+    <string name="types_checkbox_science">Science</string>
+    <string name="types_checkbox_tech">Technology</string>
+    <string name="types_checkbox_business">Business</string>
+    <string name="types_checkbox_entertainment">Entertainment</string>
 
 </resources>

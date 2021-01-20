@@ -36,4 +36,8 @@ interface EndPoints {
     @GET("top-headlines?lang=en&token=33373c71ba6ddbba81aaf657a8772c3d&max=10&topic=world")
     fun getHomeNews(): Call<ResponseModel>
 
+    //Get Entertainment Headlines
+    @GET("top-headlines?lang=en&token=33373c71ba6ddbba81aaf657a8772c3d&max=10&topic=entertainment")
+    fun getEntertainmentNews(): Call<ResponseModel>
+
 }

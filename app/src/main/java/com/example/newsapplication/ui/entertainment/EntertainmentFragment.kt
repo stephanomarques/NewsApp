@@ -1,11 +1,14 @@
-package com.example.newsapplication.ui.business
+package com.example.newsapplication.ui.entertainment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.R
@@ -18,7 +21,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class BusinessFragment : Fragment() {
+class EntertainmentFragment : Fragment() {
+
 
     private var thisLayoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<NewsAdapter.NewsHolder>? = null
@@ -27,11 +31,11 @@ class BusinessFragment : Fragment() {
 
     //On View Creation////////////////////////////////////////////////////////////////////////////
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_business, container, false)
+        return inflater.inflate(R.layout.fragment_entertainment, container, false)
     }////////////////////////////////////////////////////////////////////////////////////////////
 
     //Upon Creating View////////////////////////////////////////////////////////////////////////////
@@ -42,12 +46,12 @@ class BusinessFragment : Fragment() {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
 
         //recycler
-        val recyclerView: RecyclerView = view.findViewById(R.id.business_recyclerview)
+        val recyclerView: RecyclerView = view.findViewById(R.id.entertainment_recyclerview)
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
 
         //Get business news request and pass to adapter////////////////////////////////////////////
-        val call: Call<ResponseModel> = request.getBusinessNews()
+        val call: Call<ResponseModel> = request.getEntertainmentNews()
         call.enqueue(object : Callback<ResponseModel> {
             override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
                 if (response.isSuccessful) {
@@ -64,5 +68,6 @@ class BusinessFragment : Fragment() {
             }
         })
     }////////////////////////////////////////////////////////////////////////////////////////////
+
 
 }

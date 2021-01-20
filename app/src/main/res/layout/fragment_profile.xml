@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".ui.profile.ProfileFragment">
+
+    <TextView
+        android:id="@+id/types_title"
+        android:layout_width="377dp"
+        android:layout_height="34dp"
+        android:layout_above="@id/checkbox_health"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="-39dp"
+        android:gravity="center_horizontal"
+        android:text="@string/types_title_text"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkbox_health"
+        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/types_checkbox_health" />
+
+    <CheckBox
+            android:id="@+id/checkbox_science"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkbox_health"
+            android:text="@string/types_checkbox_science" />
+        <CheckBox
+            android:id="@+id/checkbox_sport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkbox_science"
+            android:text="@string/types_checkbox_sport" />
+
+        <CheckBox
+            android:id="@+id/checkbox_tech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkbox_sport"
+            android:text="@string/types_checkbox_tech" />
+
+        <CheckBox
+            android:id="@+id/checkbox_entertainment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkbox_tech"
+            android:text="@string/types_checkbox_entertainment" />
+
+        <CheckBox
+            android:id="@+id/checkbox_business"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkbox_entertainment"
+            android:text="@string/types_checkbox_business" />
+
+        <Button
+            android:id="@+id/news_type_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkbox_business"
+            android:layout_marginTop="10dp"
+            android:text="@string/types_update_btn_text" />
+</RelativeLayout>

@@ -19,9 +19,9 @@
             android:title="@string/menu_fav" />
 
         <item
-            android:id="@+id/nav_world"
-            android:icon="@drawable/ic_menu_world"
-            android:title="@string/menu_world" />
+            android:id="@+id/nav_entertainment"
+            android:icon="@drawable/ic_menu_entertainment"
+            android:title="@string/menu_entertainment" />
         <item
             android:id="@+id/nav_business"
             android:icon="@drawable/ic_menu_business"
