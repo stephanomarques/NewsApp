@@ -16,15 +16,14 @@ interface EndPoints {
     @GET("top-headlines?lang=en&token=33373c71ba6ddbba81aaf657a8772c3d&max=10&topic=business")
     fun getBusinessNews(): Call<ResponseModel>
 
-    //Get Specific User
-    @GET("/news/public/api/userid_by_email/{email}")
-    fun getUserIdByEmail(@Path("email") email: String): Call<List<User>>
+    //Get Health Headlines
+    @GET("top-headlines?lang=en&token=33373c71ba6ddbba81aaf657a8772c3d&max=10&topic=health")
+    fun getHealthNews(): Call<ResponseModel>
 
-    //Get All Markers
-    @GET("/news/public/api/get_markers")
-    fun getMarkers(): Call<List<News>>
+    //Get Tech Headlines
+    @GET("top-headlines?lang=en&token=33373c71ba6ddbba81aaf657a8772c3d&max=10&topic=technology")
+    fun getTechnologyNews(): Call<ResponseModel>
 
-    //Get All Markers of specific user id
-    @GET("/news/public/api/get_markers/{id}")
-    fun getMarkersById(@Path("id") id: Int): Call<List<News>>
+
+
 }
