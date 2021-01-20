@@ -28,4 +28,8 @@ interface EndPoints {
     @GET("top-headlines?lang=en&token=33373c71ba6ddbba81aaf657a8772c3d&max=10&topic=sports")
     fun getSportsNews(): Call<ResponseModel>
 
+    //Get Science Headlines
+    @GET("top-headlines?lang=en&token=33373c71ba6ddbba81aaf657a8772c3d&max=10&topic=science")
+    fun getScienceNews(): Call<ResponseModel>
+
 }
