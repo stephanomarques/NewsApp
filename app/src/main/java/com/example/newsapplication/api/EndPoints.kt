@@ -12,9 +12,9 @@ interface EndPoints {
     @GET("top-headlines?lang=en&token=33373c71ba6ddbba81aaf657a8772c3d&max=10")
     fun getTopNews(): Call<ResponseModel>
 
-    //Get Specific User
-    @GET("/news/public/api/news/{id}")
-    fun getUserById(@Path("id") id: Int): Call<User>
+    //Get Business Headlines
+    @GET("top-headlines?lang=en&token=33373c71ba6ddbba81aaf657a8772c3d&max=10&topic=business")
+    fun getBusinessNews(): Call<ResponseModel>
 
     //Get Specific User
     @GET("/news/public/api/userid_by_email/{email}")

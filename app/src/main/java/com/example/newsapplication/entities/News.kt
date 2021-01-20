@@ -7,7 +7,7 @@ data class News(
         val url: String,
         val image: String,
         val publishedAt: String,
-        //val source: Source
+        val source: Source
 )
 
 data class Source(
