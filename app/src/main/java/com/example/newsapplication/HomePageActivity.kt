@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -20,6 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.adapter.NewsAdapter
 import com.example.newsapplication.entities.News
+import com.example.newsapplication.entities.User
+import com.example.newsapplication.ui.ItemViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
@@ -31,15 +34,19 @@ import org.w3c.dom.Text
 
 class HomePageActivity : AppCompatActivity() {
 
+    private val viewModel: ItemViewModel by viewModels()
+
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     private var currentUserEmail: String = ""
-    private var currentUserName: String = ""
-    //val uri = Uri.parse(imageUrl)
+    private var currentUserUID: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
+
+        //Get logged in user email
+        val currentUserUID: String? = intent.getStringExtra("loggedInUserUID")
 
         // recycler view
         val recyclerViewNews = findViewById<RecyclerView>(R.id.news_recyclerview)
@@ -66,6 +73,7 @@ class HomePageActivity : AppCompatActivity() {
 
         val acct = GoogleSignIn.getLastSignedInAccount(this)
         if (acct != null) {
+            viewModel.setUserId(currentUserUID.toString())
             //Fill Text View on Nav Drawer with the user Name
             //val personName = acct.displayName
             //nameTextView.text = personName
@@ -77,21 +85,11 @@ class HomePageActivity : AppCompatActivity() {
             //Fill TextView on Navegation Drawer with the user Email
             //emailTextView.text = currentUserEmail
 
-            val personId = acct.id
+            val personId = acct.account
         }
 
         Toast.makeText(this@HomePageActivity, "Welcome $currentUserEmail",
                 Toast.LENGTH_SHORT).show()
-
-        //RecyclerView Configuration/////////////////////////////////////////////////////////
-        //recyclerViewNews.layoutManager = LinearLayoutManager(this)
-
-
-        //val image: ImageView = findViewById(R.id.news_image)
-        //Picasso.get().load(imageUrl).into(image);
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

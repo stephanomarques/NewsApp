@@ -137,8 +137,9 @@ class MainActivity : AppCompatActivity() {
     //Update UI runs every startup to continue the past session (if not signed out)
     fun updateUI(currentUser: FirebaseUser?) {
         if(currentUser != null){
-            val userEmail: String? = currentUser.email
+            val currentUserUid: String? = currentUser.uid
             val intent = Intent(this, HomePageActivity::class.java)
+            intent.putExtra("loggedInUserUID", currentUserUid)
             startActivity(intent)
         }
     }////////////////////////////////////////////////////////////////////////////////////
