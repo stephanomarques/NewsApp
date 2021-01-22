@@ -11,4 +11,5 @@ data class Types(
         var Science: Boolean = false,
         var Sports: Boolean = false,
         var Tech: Boolean = false,
+        var Entertainment: Boolean = false
 )

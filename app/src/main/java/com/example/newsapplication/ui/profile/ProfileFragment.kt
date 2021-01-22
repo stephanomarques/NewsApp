@@ -1,6 +1,8 @@
 package com.example.newsapplication.ui.profile
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,9 +22,17 @@ import com.example.newsapplication.api.EndPoints
 import com.example.newsapplication.api.ServiceBuilder
 import com.example.newsapplication.entities.News
 import com.example.newsapplication.entities.ResponseModel
+import com.example.newsapplication.entities.Types
 import com.example.newsapplication.entities.User
 import com.example.newsapplication.ui.ItemViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,7 +41,6 @@ class ProfileFragment : Fragment() {
 
     private val viewModel: ItemViewModel by activityViewModels()
     private var thisUser: String = ""
-    private var updateButton: Button = TODO()
 
     //On View Creation////////////////////////////////////////////////////////////////////////////
     override fun onCreateView(
@@ -50,6 +59,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val database = FirebaseDatabase.getInstance().reference
+        //user id --> thisUser
+        
         //Initialize EndPoints and Create List to contain all markers
         val request = ServiceBuilder.buildService(EndPoints::class.java)
 
@@ -60,15 +72,70 @@ class ProfileFragment : Fragment() {
         val checkboxTech: CheckBox = view.findViewById(R.id.checkbox_tech)
         val checkboxEntertainment: CheckBox = view.findViewById(R.id.checkbox_entertainment)
 
-        if(checkboxBusiness.isChecked){
-            Toast.makeText(activity, "Ticked",
-                Toast.LENGTH_SHORT).show()
-        }
+        //Query Para Saber que tipos de notícia o utilizador já está subscrito
+        val getdata = object : ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
 
-        updateButton = view.findViewById(R.id.news_type_btn)
+                for (i in p0.children) {
+                    val businessBoolean: String = i.child("$thisUser/business").value.toString()
+                    val sportBoolean: String = i.child("$thisUser/sports").value.toString()
+                    val healthBoolean: String = i.child("$thisUser/health").value.toString()
+                    val entertainmentBoolean: String = i.child("$thisUser/entertainment").value.toString()
+                    val technologyBoolean: String = i.child("$thisUser/tech").value.toString()
+                    val scienceBoolean: String = i.child("$thisUser/science").value.toString()
+
+                    //Tick the Checkboxes that are favourites of that user in the database
+                    if (businessBoolean == "true") {
+                        checkboxBusiness.isChecked = true
+                    }
+                    if (sportBoolean == "true") {
+                        checkboxSports.isChecked = true
+                    }
+                    if (healthBoolean == "true") {
+                        checkboxHealth.isChecked = true
+                    }
+                    if (entertainmentBoolean == "true") {
+                        checkboxEntertainment.isChecked = true
+                    }
+                    if (technologyBoolean == "true") {
+                        checkboxTech.isChecked = true
+                    }
+                    if (scienceBoolean == "true") {
+                        checkboxScience.isChecked = true
+                    }
+                    ///////////////////////////////////////////////////////////////////////////////
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        database.addValueEventListener(getdata)
+        database.addListenerForSingleValueEvent(getdata)
+        /////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        // Update Button Listener ////////////////////////////////////////////////////////////////
+        val updateButton: Button = view.findViewById(R.id.news_type_btn)
         updateButton.setOnClickListener {
 
-        }
+            //Types Updated
+            val types = Types(
+                    Business = checkboxBusiness.isChecked,
+                    Health = checkboxHealth.isChecked,
+                    Science = checkboxScience.isChecked,
+                    Sports = checkboxSports.isChecked,
+                    Tech = checkboxTech.isChecked,
+                    Entertainment = checkboxEntertainment.isChecked)
+
+            //Insert uid as Users child and types and uid children
+            database.child("/Users/$thisUser").setValue(types)
+
+            Toast.makeText(activity, "Updated!",
+                    Toast.LENGTH_SHORT).show()
+        }/////////////////////////////////////////////////////////////////////////////////////////
 
 
     }////////////////////////////////////////////////////////////////////////////////////////////

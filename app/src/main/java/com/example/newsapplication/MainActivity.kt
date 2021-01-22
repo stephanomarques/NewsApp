@@ -150,7 +150,13 @@ class MainActivity : AppCompatActivity() {
         val database = Firebase.database
 
         //Default Types to be Inserted
-        val types: Types = Types(Business = false, Health = false, Science = false, Sports = false, Tech = false)
+        val types: Types = Types(
+                Business = false,
+                Health = false,
+                Science = false,
+                Sports = false,
+                Tech = false,
+                Entertainment = false)
 
         val reference = database.getReference("/Users")
 
