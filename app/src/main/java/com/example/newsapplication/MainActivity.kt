@@ -24,7 +24,7 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
-    //Firebase var
+    //Firebase vars
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     companion object{
         private const val GOOGLE_SIGN_IN = 120
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
-    }////////////////////////////////////////////////////////
+    }///////////////////////////////////////////////////////////////////////////////////////////////
 
     //Sign In Activity Result Asked by SignIn Function//////////////////////////////////////////////
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

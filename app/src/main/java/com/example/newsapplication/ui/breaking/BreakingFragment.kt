@@ -1,5 +1,7 @@
 package com.example.newsapplication.ui.breaking
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +17,13 @@ import com.example.newsapplication.api.EndPoints
 import com.example.newsapplication.api.ServiceBuilder
 import com.example.newsapplication.entities.News
 import com.example.newsapplication.entities.ResponseModel
+import kotlinx.coroutines.newSingleThreadContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class BreakingFragment : Fragment() {
+class BreakingFragment : Fragment(), NewsAdapter.ClickListener{
 
     private var thisLayoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<NewsAdapter.NewsHolder>? = null
@@ -33,10 +36,11 @@ class BreakingFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_breaking, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?, ) {
         super.onViewCreated(view, savedInstanceState)
 
         //Initialize EndPoints and Create List to contain all markers
@@ -54,7 +58,7 @@ class BreakingFragment : Fragment() {
                 if (response.isSuccessful) {
                     val theseNews: List<News>? = response.body()!!.allNews
                     if(theseNews != null){
-                        mAdapter = context?.let { NewsAdapter(it, theseNews) }
+                        mAdapter = setupAdapter(theseNews)
                         recyclerView.adapter = mAdapter
                     }
                 }
@@ -65,5 +69,19 @@ class BreakingFragment : Fragment() {
             }
         })////////////////////////////////////////////////////////////////////////////////////////
     }
+
+    //Adapter Setup for Recycler////////////////////////////////////////////////////////////
+    fun setupAdapter(news: List<News>): NewsAdapter? {
+        mAdapter = context?.let { NewsAdapter(it, news, this) }
+        return mAdapter
+    }////////////////////////////////////////////////////////////////////////////////////
+
+    //Clicked Item Action (Opens URL of News Article in Browser)//////////////////////////////
+    override fun ClickedItem(news: News) {
+        val url = news.url
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }/////////////////////////////////////////////////////////////////////////////////////////
 
 }

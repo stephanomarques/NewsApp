@@ -1,14 +1,13 @@
 package com.example.newsapplication.ui.sports
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.R
@@ -21,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SportsFragment : Fragment() {
+class SportsFragment : Fragment(), NewsAdapter.ClickListener {
 
     private var thisLayoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<NewsAdapter.NewsHolder>? = null
@@ -56,7 +55,7 @@ class SportsFragment : Fragment() {
                 if (response.isSuccessful) {
                     val theseNews: List<News>? = response.body()!!.allNews
                     if(theseNews != null){
-                        mAdapter = context?.let { NewsAdapter(it, theseNews) }
+                        mAdapter = setupAdapter(theseNews)
                         recyclerView.adapter = mAdapter
                     }
                 }
@@ -68,5 +67,17 @@ class SportsFragment : Fragment() {
         })
     }////////////////////////////////////////////////////////////////////////////////////////////
 
+    //Adapter Setup for Recycler////////////////////////////////////////////////////////////
+    fun setupAdapter(news: List<News>): NewsAdapter? {
+        mAdapter = context?.let { NewsAdapter(it, news, this) }
+        return mAdapter
+    }////////////////////////////////////////////////////////////////////////////////////
 
+    //Clicked Item Action (Opens URL of News Article in Browser)//////////////////////////////
+    override fun ClickedItem(news: News) {
+        val url = news.url
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }/////////////////////////////////////////////////////////////////////////////////////////
 }
