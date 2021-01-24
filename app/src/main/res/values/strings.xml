@@ -31,5 +31,7 @@
     <string name="types_checkbox_tech">Technology</string>
     <string name="types_checkbox_business">Business</string>
     <string name="types_checkbox_entertainment">Entertainment</string>
+    <string name="message_subscribed">Subscribed Successfully</string>
+    <string name="message_subscribe_failed">Subscribed Failed</string>
 
 </resources>

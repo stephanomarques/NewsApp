@@ -33,6 +33,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -106,8 +108,9 @@ class ProfileFragment : Fragment() {
                     ///////////////////////////////////////////////////////////////////////////////
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.d("OnCancelledCheckbox", "Database Error")
             }
 
         }
@@ -130,14 +133,54 @@ class ProfileFragment : Fragment() {
                     Tech = checkboxTech.isChecked,
                     Entertainment = checkboxEntertainment.isChecked)
 
+            if(checkboxBusiness.isChecked){
+                subscribeTopic("business")
+            }
+
+            if(checkboxHealth.isChecked){
+                subscribeTopic("health")
+            }
+
+            if(checkboxScience.isChecked){
+                subscribeTopic("science")
+            }
+
+            if(checkboxSports.isChecked){
+                subscribeTopic("sports")
+            }
+
+            if(checkboxTech.isChecked){
+                subscribeTopic("tech")
+            }
+
+            if(checkboxEntertainment.isChecked){
+                subscribeTopic("entertainment")
+            }
+
             //Insert uid as Users child and types and uid children
             database.child("/Users/$thisUser").setValue(types)
 
-            Toast.makeText(activity, "Updated!",
-                    Toast.LENGTH_SHORT).show()
+
+            //Toast.makeText(activity, "Updated!", Toast.LENGTH_SHORT).show()
         }/////////////////////////////////////////////////////////////////////////////////////////
 
 
     }////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    private fun subscribeTopic(TOPIC: String) {
+        // [START subscribe_topics]
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+                .addOnCompleteListener { task ->
+                    var msg = getString(R.string.message_subscribed)
+                    if (!task.isSuccessful) {
+                        msg = getString(R.string.message_subscribe_failed)
+                    }
+                    Log.v("Subscribed: ", msg)
+                    Toast.makeText(activity, "$msg", Toast.LENGTH_SHORT).show()
+                }
+        // [END subscribe_topics]
+    }
+
 
 }
