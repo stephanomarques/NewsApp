@@ -1,8 +1,5 @@
 package com.example.newsapplication.ui.health
 
-import android.content.ContentValues.TAG
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,15 +18,13 @@ import com.example.newsapplication.entities.News
 import com.example.newsapplication.entities.NotificationData
 import com.example.newsapplication.entities.PushNotification
 import com.example.newsapplication.entities.ResponseModel
-import com.google.firebase.messaging.FirebaseMessagingService
-import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
+
 
 const val TOPIC = "/topics/health"
 
@@ -43,9 +38,9 @@ class HealthFragment : Fragment(), NewsAdapter.ClickListener {
 
     //On View Creation////////////////////////////////////////////////////////////////////////////
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_health, container, false)
     }////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,7 +63,7 @@ class HealthFragment : Fragment(), NewsAdapter.ClickListener {
             override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
                 if (response.isSuccessful) {
                     val theseNews: List<News>? = response.body()!!.allNews
-                    if(theseNews != null){
+                    if (theseNews != null) {
                         mAdapter = setupAdapter(theseNews)
                         recyclerView.adapter = mAdapter
                     }
@@ -113,7 +108,7 @@ class HealthFragment : Fragment(), NewsAdapter.ClickListener {
         try{
             val response = NotificationsRetroFit.api.postNotification(notification)
             if(response.isSuccessful){
-                Log.d(TAG, "Response: $response" )
+                Log.d(TAG, "Response: $response")
             }else{
                 Log.e(TAG, response.errorBody().toString())
             }

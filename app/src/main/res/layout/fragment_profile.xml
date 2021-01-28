@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
+        android:padding="5dp"
         tools:context=".ui.profile.ProfileFragment">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_width="377dp"
         android:layout_height="34dp"
         android:layout_above="@id/checkbox_health"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="-39dp"
         android:gravity="center_horizontal"
         android:text="@string/types_title_text"
@@ -23,7 +23,7 @@
 
     <CheckBox
         android:id="@+id/checkbox_health"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/types_checkbox_health" />
@@ -67,6 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/checkbox_business"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:text="@string/types_update_btn_text" />
 </RelativeLayout>
