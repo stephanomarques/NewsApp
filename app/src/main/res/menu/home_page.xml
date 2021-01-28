@@ -6,4 +6,11 @@
         android:orderInCategory="100"
         android:title="@string/sign_out_string"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/notification_Health"
+        android:orderInCategory="100"
+        android:title="@string/health_notification"
+        app:showAsAction="never" />
+
 </menu>

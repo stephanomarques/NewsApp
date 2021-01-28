@@ -3,6 +3,7 @@ package com.example.newsapplication
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -20,7 +21,10 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.adapter.NewsAdapter
+import com.example.newsapplication.api.NotificationsRetroFit
 import com.example.newsapplication.entities.News
+import com.example.newsapplication.entities.NotificationData
+import com.example.newsapplication.entities.PushNotification
 import com.example.newsapplication.entities.User
 import com.example.newsapplication.ui.ItemViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -29,8 +33,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.w3c.dom.Text
-
 
 class HomePageActivity : AppCompatActivity() {
 

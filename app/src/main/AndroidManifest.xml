@@ -3,7 +3,9 @@
     package="com.example.newsapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsApplication"
         android:name="androidx.multidex.MultiDexApplication">
+        <service android:name=".FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.internet.RECEIVE"/>
+            </intent-filter>
+
+        </service>
         <activity
             android:name=".HomePageActivity"
             android:label="@string/title_activity_home_page"

@@ -1,8 +1,10 @@
 package com.example.newsapplication.ui.health
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +15,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.R
 import com.example.newsapplication.adapter.NewsAdapter
 import com.example.newsapplication.api.EndPoints
+import com.example.newsapplication.api.NotificationsRetroFit
 import com.example.newsapplication.api.ServiceBuilder
 import com.example.newsapplication.entities.News
+import com.example.newsapplication.entities.NotificationData
+import com.example.newsapplication.entities.PushNotification
 import com.example.newsapplication.entities.ResponseModel
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+
+const val TOPIC = "/topics/health"
 
 class HealthFragment : Fragment(), NewsAdapter.ClickListener {
 
@@ -26,6 +39,7 @@ class HealthFragment : Fragment(), NewsAdapter.ClickListener {
     private var adapter: RecyclerView.Adapter<NewsAdapter.NewsHolder>? = null
     private lateinit var sampleNews: List<News>
     private var mAdapter: NewsAdapter? = null
+    val TAG = "Health Fragment"
 
     //On View Creation////////////////////////////////////////////////////////////////////////////
     override fun onCreateView(
@@ -75,10 +89,37 @@ class HealthFragment : Fragment(), NewsAdapter.ClickListener {
 
     //Clicked Item Action (Opens URL of News Article in Browser)//////////////////////////////
     override fun ClickedItem(news: News) {
-        val url = news.url
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        startActivity(intent)
+
+        val title = news.title
+        val message = news.description
+        val image = news.image
+
+        if(title.isNotEmpty() && message.isNotEmpty()){
+            PushNotification(
+                    NotificationData(title, message, image),
+                    TOPIC
+            ).also{
+                    sendNotification(it)
+            }
+        }
+
+        //val url = news.url
+        //val intent = Intent(Intent.ACTION_VIEW)
+        //intent.data = Uri.parse(url)
+        //startActivity(intent)
     }/////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+        try{
+            val response = NotificationsRetroFit.api.postNotification(notification)
+            if(response.isSuccessful){
+                Log.d(TAG, "Response: $response" )
+            }else{
+                Log.e(TAG, response.errorBody().toString())
+            }
+        }catch (e: Exception) {
+            Log.e(TAG, e.toString())
+        }
+    }
 
 }

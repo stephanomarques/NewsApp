@@ -63,6 +63,8 @@ class ProfileFragment : Fragment() {
 
         val database = FirebaseDatabase.getInstance().reference
         //user id --> thisUser
+
+        Log.d("ProfileFragmentUID", "$thisUser")
         
         //Initialize EndPoints and Create List to contain all markers
         val request = ServiceBuilder.buildService(EndPoints::class.java)
@@ -135,33 +137,45 @@ class ProfileFragment : Fragment() {
 
             if(checkboxBusiness.isChecked){
                 subscribeTopic("business")
+            }else{
+                unsubscribeFromTopic("business")
             }
 
             if(checkboxHealth.isChecked){
                 subscribeTopic("health")
+            }else{
+                unsubscribeFromTopic("health")
             }
 
             if(checkboxScience.isChecked){
                 subscribeTopic("science")
+            }else{
+                unsubscribeFromTopic("science")
             }
 
             if(checkboxSports.isChecked){
                 subscribeTopic("sports")
+            }else{
+                unsubscribeFromTopic("sports")
             }
 
             if(checkboxTech.isChecked){
                 subscribeTopic("tech")
+            }else{
+                unsubscribeFromTopic("tech")
             }
 
             if(checkboxEntertainment.isChecked){
                 subscribeTopic("entertainment")
+            }else{
+                unsubscribeFromTopic("entertainment")
             }
 
             //Insert uid as Users child and types and uid children
             database.child("/Users/$thisUser").setValue(types)
 
 
-            //Toast.makeText(activity, "Updated!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Updated!", Toast.LENGTH_SHORT).show()
         }/////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -169,17 +183,29 @@ class ProfileFragment : Fragment() {
 
 
     private fun subscribeTopic(TOPIC: String) {
-        // [START subscribe_topics]
+        //START subscribe_topics
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
                 .addOnCompleteListener { task ->
                     var msg = getString(R.string.message_subscribed)
                     if (!task.isSuccessful) {
                         msg = getString(R.string.message_subscribe_failed)
+                        Log.v("TOPIC $TOPIC : ", msg)
                     }
-                    Log.v("Subscribed: ", msg)
-                    Toast.makeText(activity, "$msg", Toast.LENGTH_SHORT).show()
+                    Log.v("TOPIC $TOPIC : ", msg)
                 }
-        // [END subscribe_topics]
+        // END subscribe_topics
+    }
+
+    private fun unsubscribeFromTopic(TOPIC: String){
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(TOPIC)
+                .addOnCompleteListener { task ->
+                    var msg = getString(R.string.message_unsubscribed)
+                    if (!task.isSuccessful) {
+                        msg = getString(R.string.message_unsubscribe_failed)
+                        Log.v("TOPIC $TOPIC : ", msg)
+                    }
+                    Log.v("TOPIC $TOPIC : ", msg)
+                }
     }
 
 

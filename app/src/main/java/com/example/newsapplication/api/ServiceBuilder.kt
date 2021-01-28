@@ -1,5 +1,6 @@
 package com.example.newsapplication.api
 
+import com.example.newsapplication.entities.Constants.Companion.BASE_URL
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,4 +27,14 @@ object ServiceBuilder {
     fun<T> buildService(service: Class<T>): T{
         return retrofit.create(service)
     }
+
+    private val retrofitNotification = Retrofit.Builder()
+            .baseUrl("$BASE_URL")
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(client.build()).build()
+
+    fun<T> buildService2(service: Class<T>): T{
+        return retrofitNotification.create(service)
+    }
+
 }
